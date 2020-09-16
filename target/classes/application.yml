@@ -43,20 +43,20 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: Reservation
-          uri: http://Reservation:8080
+        - id: admin03-reservation
+          uri: http://admin03-reservation:8080
           predicates:
             - Path=/reservations/** 
-        - id: Owner
-          uri: http://Owner:8080
+        - id: admin03-owner
+          uri: http://admin03-owner:8080
           predicates:
             - Path=/owners/** 
-        - id: Management
-          uri: http://Management:8080
+        - id: admin03-management
+          uri: http://admin03-management:8080
           predicates:
             - Path=/managements/** 
-        - id: reservationStatus
-          uri: http://reservationStatus:8080
+        - id: admin03-reservationstatus
+          uri: http://admin03-reservationstatus:8080
           predicates:
             - Path= /reservationStatuses/**
       globalcors:
