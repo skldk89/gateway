@@ -1,0 +1,74 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: Reservation
+          uri: http://localhost:8081
+          predicates:
+            - Path=/reservations/** 
+        - id: Owner
+          uri: http://localhost:8082
+          predicates:
+            - Path=/owners/** 
+        - id: Management
+          uri: http://localhost:8083
+          predicates:
+            - Path=/managements/** 
+        - id: reservationStatus
+          uri: http://localhost:8084
+          predicates:
+            - Path= /reservationStatuses/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: Reservation
+          uri: http://Reservation:8080
+          predicates:
+            - Path=/reservations/** 
+        - id: Owner
+          uri: http://Owner:8080
+          predicates:
+            - Path=/owners/** 
+        - id: Management
+          uri: http://Management:8080
+          predicates:
+            - Path=/managements/** 
+        - id: reservationStatus
+          uri: http://reservationStatus:8080
+          predicates:
+            - Path= /reservationStatuses/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
